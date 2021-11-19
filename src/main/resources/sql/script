@@ -12,9 +12,9 @@ Create table bonsai
     acquisition_date date,
     acquisition_age int,
     status varchar (15)
-    )
+    );
 
-insert into bonsai values (
-    ('63696432-01a2-4b43-b162-47b4f1e6062a', 'Pepito', 'Jade tree', '10-06-2021', 25 , 'alive')
+insert into bonsai (id, name, species, acquisition_date, acquisition_age, status) values (
+    ('63696432-01a2-4b43-b162-47b4f1e6062a', 'Pepito', 'Jade tree', '10-06-2021', 25 , 'alive'),
     ('24996432-11p2-4b85-o662-47b4f1e6062a', 'James', 'Jade tree', '21-11-2020', 23, 'alive')
     );

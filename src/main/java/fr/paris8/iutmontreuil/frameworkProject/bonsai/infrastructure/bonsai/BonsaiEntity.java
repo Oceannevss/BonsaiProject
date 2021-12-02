@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -18,3 +18,29 @@ insert into bonsai (id, name, species, acquisition_date, acquisition_age, status
     ('63696432-01a2-4b43-b162-47b4f1e6062a', 'Pepito', 'Jade tree', '10-06-2021', 25 , 'alive'),
     ('24996432-11p2-4b85-o662-47b4f1e6062a', 'James', 'Jade tree', '21-11-2020', 23, 'alive')
     );
+
+
+CREATE TABLE owner (
+    id UUID PRIMARY KEY,
+
+);
+
+CREATE TABLE pruning (
+    id UUID PRIMARY KEY,
+    pruning_date DATE,
+    bonsai_id UUID,
+    --FOREIGN KEY (bonsai_id) REFERENCES Bonsai(id)
+);
+
+CREATE TABLE repotting (
+    id UUID PRIMARY KEY,
+    repotting_date DATE,
+
+);
+
+
+CREATE TABLE watering (
+    id UUID PRIMARY KEY,
+    watering_date DATE,
+
+);

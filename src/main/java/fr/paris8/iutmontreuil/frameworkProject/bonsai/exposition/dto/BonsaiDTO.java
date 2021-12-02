@@ -1,8 +1,5 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
-
-import javax.persistence.Column;
 import java.util.UUID;
 
 public class BonsaiDTO {

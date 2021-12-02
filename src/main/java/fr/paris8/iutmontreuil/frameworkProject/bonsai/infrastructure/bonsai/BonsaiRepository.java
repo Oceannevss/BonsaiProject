@@ -1,12 +1,9 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.BonsaiMapper;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -31,7 +28,7 @@ public class BonsaiRepository {
     }*/
 
     @GetMapping("/{uuid}")
-    public Optional<Bonsai> FindById(@PathVariable("uuid") UUID uuid) {
+    public Optional<Bonsai> findById(@PathVariable("uuid") UUID uuid) {
 
         Optional<BonsaiEntity> res = bonsaiDao.findById(uuid);
 
@@ -46,5 +43,17 @@ public class BonsaiRepository {
         BonsaiEntity save = bonsaiDao.save(bonsai);
         return BonsaiMapper.EntityToBonsai(save);
 
+    }
+
+    @DeleteMapping
+    public void delete(UUID uuid){
+
+        bonsaiDao.deleteById(uuid);
+    }
+
+    @PatchMapping
+    public Bonsai update (Bonsai bonsai){
+
+        return BonsaiMapper.EntityToBonsai(bonsaiDao.save(BonsaiMapper.BonsaiToEntity(bonsai)));
     }
 }

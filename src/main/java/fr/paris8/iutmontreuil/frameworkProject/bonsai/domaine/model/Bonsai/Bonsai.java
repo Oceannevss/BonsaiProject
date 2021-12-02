@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 
 import java.util.UUID;
 

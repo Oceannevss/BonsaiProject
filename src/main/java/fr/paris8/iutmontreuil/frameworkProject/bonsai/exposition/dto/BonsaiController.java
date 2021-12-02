@@ -2,14 +2,10 @@ package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.BonsaiMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.BonsaiService;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.BonsaiDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.BonsaiEntity;
-import org.springframework.http.HttpStatus;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,9 +32,9 @@ public class BonsaiController {
     }*/
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<BonsaiDTO> FindById(@PathVariable("uuid") UUID uuid) {
+    public ResponseEntity<BonsaiDTO> findById(@PathVariable("uuid") UUID uuid) {
 
-            Optional<Bonsai> bonsai = bonsaiService.FindById(uuid);
+            Optional<Bonsai> bonsai = bonsaiService.findById(uuid);
           return bonsai.map(bonsai1 -> BonsaiMapper.bonsaiToDto(bonsai1))
                     .map(bonsaiDTO -> ResponseEntity.ok(bonsaiDTO))
                     .orElse(ResponseEntity.notFound().build());
@@ -56,19 +52,17 @@ public class BonsaiController {
 
    }
 
-    @PatchMapping("/{uuid}")
-    public ResponseEntity<BonsaiDTO> update(@PathVariable("uuid") UUID uuid, @RequestBody BonsaiDTO bonsaiDTO){
+   @DeleteMapping("/{uuid}")
+    public void delete(@PathVariable UUID uuid){
 
+         bonsaiService.delete(uuid);
+   }
 
-
-        return ResponseEntity.ok(bonsaiDTO);
+    @PatchMapping("/{id}")
+    public ResponseEntity<BonsaiDTO> update(@PathVariable UUID id, @RequestBody BonsaiDTO updatedBonsai) {
+        return bonsaiService.update(id, BonsaiMapper.DtoToBonsai(updatedBonsai))
+                            .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))
+                            .orElse(ResponseEntity.notFound().build());
     }
-
-
-   /*@DeleteMapping("/{uuid}")
-    public BonsaiEntity deletePost(@RequestBody BonsaiEntity bonsai){
-
-        return bonsaiDao.delete(bonsai);
-   }*/
 
 }

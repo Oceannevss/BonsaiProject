@@ -1,15 +1,16 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Watering {
+public class RepottingDTO {
 
     private UUID id;
-    private Date wateringDate;
+    private Date repottingDate;
     private UUID bonsai_id;
 
-    public Watering() {
+    public RepottingDTO(){
+
     }
 
     public UUID getId() {
@@ -20,12 +21,12 @@ public class Watering {
         this.id = id;
     }
 
-    public Date getWateringDate() {
-        return wateringDate;
+    public Date getRepottingDate() {
+        return repottingDate;
     }
 
-    public void setWatering_date(Date wateringDate) {
-        this.wateringDate = wateringDate;
+    public void setRepottingDate(Date repottingDate) {
+        this.repottingDate = repottingDate;
     }
 
     public UUID getBonsai_id() {

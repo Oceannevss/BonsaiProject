@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository
-public class WateringDao extends JpaRepository<WateringEntity, UUID> {
+public interface WateringDao extends JpaRepository<WateringEntity, UUID> {
 
 }

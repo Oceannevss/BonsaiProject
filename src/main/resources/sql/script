@@ -12,7 +12,10 @@ Create table bonsai
     acquisition_date date,
     acquisition_age int,
     status varchar (15)
+    owner_id UUID,
+    FOREIGN KEY (owner_id) REFERENCES owner(id)
     );
+
 
 insert into bonsai (id, name, species, acquisition_date, acquisition_age, status) values (
     ('63696432-01a2-4b43-b162-47b4f1e6062a', 'Pepito', 'Jade tree', '10-06-2021', 25 , 'alive'),
@@ -22,25 +25,29 @@ insert into bonsai (id, name, species, acquisition_date, acquisition_age, status
 
 CREATE TABLE owner (
     id UUID PRIMARY KEY,
-
+    name varchar (30),
+    bonsai_id UUID
+    FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );
 
 CREATE TABLE pruning (
     id UUID PRIMARY KEY,
     pruning_date DATE,
     bonsai_id UUID,
-    --FOREIGN KEY (bonsai_id) REFERENCES Bonsai(id)
+    FOREIGN KEY (bonsai_id) REFERENCES Bonsai(id)
 );
 
 CREATE TABLE repotting (
     id UUID PRIMARY KEY,
     repotting_date DATE,
-
+    bonsai_id UUID,
+    FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );
 
 
 CREATE TABLE watering (
     id UUID PRIMARY KEY,
     watering_date DATE,
-
+    bonsai_id UUID,
+    FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );

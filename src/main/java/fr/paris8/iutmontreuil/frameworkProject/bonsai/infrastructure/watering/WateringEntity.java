@@ -1,21 +1,24 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity (name = "watering")
 @Table(name = "watering")
-public interface WateringEntity {
+public class WateringEntity {
 
         @Id
         @GeneratedValue(generator = "uuid2")
         @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+        @Column(name = "id")
         private UUID id;
         @Column(name = "watering_date")
         private Date wateringDate;
+        @Column(name = "bonsai_id")
+        private UUID bonsai_id;
 
 
 
@@ -31,11 +34,11 @@ public interface WateringEntity {
         }
 
         public Date getWatering_date() {
-            return watering_date;
+            return wateringDate;
         }
 
         public void setWatering_date(Date watering_date) {
-            this.watering_date = watering_date;
+            this.wateringDate = watering_date;
         }
 
         public UUID getBonsai_id() {

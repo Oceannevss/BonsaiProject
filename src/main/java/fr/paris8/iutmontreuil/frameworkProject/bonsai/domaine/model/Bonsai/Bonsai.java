@@ -16,6 +16,8 @@ public class Bonsai {
 
     private String status;
 
+    private UUID ownerId;
+
     public Bonsai(){
 
     }
@@ -67,4 +69,13 @@ public class Bonsai {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public UUID getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
+
 }

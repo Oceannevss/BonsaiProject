@@ -16,6 +16,8 @@ public class BonsaiDTO {
 
     private String status;
 
+    private UUID ownerId;
+
     public BonsaiDTO(){
 
     }
@@ -68,5 +70,11 @@ public class BonsaiDTO {
         this.status = status;
     }
 
+    public UUID getOwnerId() {
+        return ownerId;
+    }
 
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
 }

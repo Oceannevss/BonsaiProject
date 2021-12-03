@@ -1,19 +1,29 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.BonsaiMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.PruningMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.RepottingMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.WateringMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.BonsaiService;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.pruning.Pruning;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.repotting.Repotting;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Watering;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bonsais")
 public class BonsaiController {
 
     private final BonsaiService bonsaiService;
+
 
     public BonsaiController(BonsaiService bonsaiService) {
         this.bonsaiService = bonsaiService;
@@ -26,10 +36,13 @@ public class BonsaiController {
         return "hello World ";
     }*/
 
-  /*  @GetMapping
-    public List<BonsaiEntity> helloWorld() {
-        return bonsaiDao.findAll();
-    }*/
+    @GetMapping()
+    public List<Bonsai> findAll() {
+        return bonsaiService.findAll()
+                            .stream()
+                            .map(BonsaiMapper::DtoToBonsai)
+                                    .collect(Collectors.toList());
+    }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<BonsaiDTO> findById(@PathVariable("uuid") UUID uuid) {
@@ -58,11 +71,48 @@ public class BonsaiController {
          bonsaiService.delete(uuid);
    }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<BonsaiDTO> update(@PathVariable UUID id, @RequestBody BonsaiDTO updatedBonsai) {
-        return bonsaiService.update(id, BonsaiMapper.DtoToBonsai(updatedBonsai))
+    @PatchMapping("/{uuid}")
+    public ResponseEntity<BonsaiDTO> update(@PathVariable UUID uuid, @RequestBody BonsaiDTO bonsaiDTO) {
+
+        return bonsaiService.update(uuid, BonsaiMapper.DtoToBonsai(bonsaiDTO))
                             .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))
                             .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{uuid}/status")
+    public  ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody  BonsaiDTO bonsaiDTO){
+
+        return bonsaiService.update(uuid, BonsaiMapper.DtoToBonsai(bonsaiDTO))
+                            .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))
+                            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{uuid}/watering")
+    public ResponseEntity<WateringDTO> findWateringById(@PathVariable("uuid") UUID uuid){
+
+        Optional<Watering> watering = bonsaiService.findWateringById(uuid);
+
+        return watering.map(watering1 -> WateringMapper.wateringToDto(watering1))
+                        .map(wateringDTO -> ResponseEntity.ok(wateringDTO))
+                        .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{uuid}/repotting")
+    public ResponseEntity<RepottingDTO> findRepottingById(@PathVariable UUID uuid){
+         Optional<Repotting> repotting = bonsaiService.findRepottingById(uuid);
+
+         return repotting.map(repotting1 -> RepottingMapper.repottingToDto(repotting1))
+                         .map(repottingDTO -> ResponseEntity.ok(repottingDTO))
+                         .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{uuid}/pruning")
+    public ResponseEntity<PruningDTO> findPruningById(@PathVariable("uuid") UUID uuid){
+        Optional<Pruning> pruning = bonsaiService.findPruningById(uuid);
+
+        return pruning.map(pruning1 -> PruningMapper.pruningToDto(pruning1))
+                        .map(pruningDTO -> ResponseEntity.ok(pruningDTO))
+                        .orElse(ResponseEntity.notFound().build());
     }
 
 }

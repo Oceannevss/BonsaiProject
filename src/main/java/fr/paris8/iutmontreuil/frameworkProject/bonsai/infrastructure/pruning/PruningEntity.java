@@ -14,6 +14,7 @@ public class PruningEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id")
     private UUID id;
     @Column(name = "pruning_date")
     private Date pruningDate;
@@ -34,7 +35,7 @@ public class PruningEntity {
         return pruningDate;
     }
 
-    public void setPruning_date(Date pruning_date) {
+    public void setPruningDate(Date pruning_date) {
         this.pruningDate = pruning_date;
     }
 

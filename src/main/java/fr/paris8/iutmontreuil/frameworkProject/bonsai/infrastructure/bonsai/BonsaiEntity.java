@@ -31,7 +31,10 @@ public class BonsaiEntity {
    @Column (name = "status")
    private String status;
 
-   public BonsaiEntity(){
+
+
+
+    public BonsaiEntity(){
 
    }
 
@@ -82,4 +85,12 @@ public class BonsaiEntity {
     public void setStatus(String status) {
         this.status = status;
     }
+
+   /* public UUID getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }*/
 }

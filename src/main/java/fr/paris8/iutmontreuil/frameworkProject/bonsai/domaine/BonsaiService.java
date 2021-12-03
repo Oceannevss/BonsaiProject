@@ -1,6 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.WateringMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.pruning.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.repotting.Repotting;
@@ -8,7 +9,9 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Wat
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.BonsaiDTO;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiRepository;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +35,9 @@ public class BonsaiService {
         return bonsaiRepository.FindById(uuid);
     }*/
 
-    public List<BonsaiDTO> findAll() {
+    public List<Bonsai> findAll() {
 
-        return bonsaiRepository.findAll()
-                                .stream()
-                                .map(BonsaiMapper::bonsaiToDto)
-                                .collect(Collectors.toList());
-
-
+        return bonsaiRepository.findAll();
     }
 
 
@@ -50,7 +48,7 @@ public class BonsaiService {
 
     public Bonsai create(@RequestBody Bonsai bonsai){
 
-       return bonsaiRepository.create(BonsaiMapper.BonsaiToEntity(bonsai));
+       return bonsaiRepository.create(bonsai);
 
     }
 
@@ -89,15 +87,25 @@ public class BonsaiService {
         return bonsaiUpdate;
     }
 
-    public Optional<Watering> findWateringById(@PathVariable("uuid") UUID uuid) {
-        return bonsaiRepository.findWateringById(uuid);
+    public List<Watering> findWateringById(@PathVariable("uuid") UUID uuid) {
+
+            Optional<Bonsai> bonsai = bonsaiRepository.findById(uuid);
+
+                if(bonsai.isPresent()){
+
+                    return bonsai.get().getListeWatering().stream()
+                            .map(WateringMapper::entityToWatering)
+                            .collect(Collectors.toList());
+                }else {
+                    return
+                }
     }
 
-    public Optional<Repotting> findRepottingById(@PathVariable("uuid") UUID uuid) {
+    /*public Optional<Repotting> findRepottingById(@PathVariable("uuid") UUID uuid) {
         return bonsaiRepository.findRepottingById(uuid);
     }
 
     public Optional<Pruning> findPruningById(@PathVariable("uuid") UUID uuid){
         return bonsaiRepository.findPruningById(uuid);
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ set search_path = bonsai_database ;
 
 alter role opandore set search_path to bonsai_database ;
 
-Create table bonsai
+Create table IF not exists bonsai
     (
     id UUID PRIMARY KEY NOT NULL,
     name varchar (30),
@@ -26,7 +26,8 @@ insert into bonsai (id, name, species, acquisition_date, acquisition_age, status
 CREATE TABLE owner (
     id UUID PRIMARY KEY,
     name varchar (30),
-    bonsai_id UUID
+    bonsai_id UUID,
+
     FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );
 
@@ -34,7 +35,7 @@ CREATE TABLE pruning (
     id UUID PRIMARY KEY,
     pruning_date DATE,
     bonsai_id UUID,
-    FOREIGN KEY (bonsai_id) REFERENCES Bonsai(id)
+    FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );
 
 CREATE TABLE repotting (
@@ -51,3 +52,12 @@ CREATE TABLE watering (
     bonsai_id UUID,
     FOREIGN KEY (bonsai_id) REFERENCES bonsai(id)
 );
+
+insert into bonsai (id, name, species, acquisition_date, acquisition_age, status) values (
+    ('22dd930c-fe5d-497d-9b60-462f2083541d', 'Jack', 'Jade tree', '02-07-2022', 18 , 'alive');
+insert into watering (id, watering_date, bonsai_id) values ('33c6eb7e-5440-11ec-bf63-0242ac130002',
+'2022-07-24', '22dd930c-fe5d-497d-9b60-462f2083541d');
+insert into pruning (id, bonsai_id, pruning_date) values ('33c6edc2-5440-11ec-bf63-0242ac130002',
+'22dd930c-fe5d-497d-9b60-462f2083541d','2022-07-21');
+insert into repotting (id, bonsai_id, repotting_date) values ('33c6eed0-5440-11ec-bf63-0242ac130002',
+'22dd930c-fe5d-497d-9b60-462f2083541d', '2022-07-24');

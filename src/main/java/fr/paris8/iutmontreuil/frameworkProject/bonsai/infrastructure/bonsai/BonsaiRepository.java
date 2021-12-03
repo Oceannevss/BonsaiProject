@@ -47,13 +47,6 @@ public class BonsaiRepository {
                         .collect(Collectors.toList());
     }
 
-   /* @GetMapping("/{uuid}")
-    public ResponseEntity<BonsaiEntity> FindById(@PathVariable("uuid") UUID uuid) {
-        return bonsaiDao.findById(uuid)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }*/
-
     public Optional<Bonsai> findById(@PathVariable("uuid") UUID uuid) {
 
         Optional<BonsaiEntity> res = bonsaiDao.findById(uuid);
@@ -63,9 +56,11 @@ public class BonsaiRepository {
 
     }
 
-    public Bonsai create(@RequestBody BonsaiEntity bonsai){
+    public Bonsai create(@RequestBody Bonsai bonsai){
 
-        BonsaiEntity save = bonsaiDao.save(bonsai);
+        BonsaiEntity bonsaiEntity = BonsaiMapper.BonsaiToEntity(bonsai);
+        BonsaiEntity save = bonsaiDao.save(bonsaiEntity);
+
         return BonsaiMapper.EntityToBonsai(save);
 
     }
@@ -83,24 +78,6 @@ public class BonsaiRepository {
     public  Bonsai statusUpdate (Bonsai bonsai){
 
         return BonsaiMapper.EntityToBonsai(bonsaiDao.save(BonsaiMapper.BonsaiToEntity(bonsai)));
-    }
-
-    public Optional<Watering> findWateringById(@PathVariable("uuid") UUID uuid){
-
-        Optional<WateringEntity> res = wateringDao.findById(uuid);
-        return  res.map(wateringEntity -> WateringMapper.entityToWatering(wateringEntity));
-    }
-
-    public Optional<Repotting> findRepottingById(@PathVariable("uuid") UUID uuid){
-
-        Optional<RepottingEntity> res = repottingDao.findById(uuid);
-        return res.map(repottingEntity -> RepottingMapper.entityToRepotting(repottingEntity));
-    }
-
-    public Optional<Pruning> findPruningById(@PathVariable("uuid") UUID uuid){
-
-        Optional<PruningEntity> res = pruningDao.findById(uuid);
-        return  res.map(pruningEntity -> PruningMapper.entityToPruning(pruningEntity));
     }
 
 }

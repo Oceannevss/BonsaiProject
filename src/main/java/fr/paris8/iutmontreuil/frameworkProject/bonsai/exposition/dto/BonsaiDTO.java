@@ -1,5 +1,6 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class BonsaiDTO {
@@ -10,7 +11,7 @@ public class BonsaiDTO {
 
     private String species;
 
-    private String acquisitionDate;
+    private LocalDate acquisitionDate;
 
     private int acquisitionAge;
 
@@ -46,11 +47,11 @@ public class BonsaiDTO {
         this.species = species;
     }
 
-    public String getAcquisitionDate() {
+    public LocalDate getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(String acquisitionDate) {
+    public void setAcquisitionDate(LocalDate acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 

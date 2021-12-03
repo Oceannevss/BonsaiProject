@@ -1,42 +1,49 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Watering;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity (name = "bonsai")
 @Table (name = "bonsai")
 public class BonsaiEntity {
 
-   @Id
-   @GeneratedValue(generator = "uuid2")
-   @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-   @Column (name = "id")
-   private UUID id;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column (name = "id")
+    private UUID id;
 
-   @Column (name = "name")
-   private String name;
+    @Column (name = "name")
+    private String name;
 
-   @Column (name = "species")
-   private String species;
+    @Column (name = "species")
+    private String species;
 
-   @Column (name = "acquisition_date")
-   private String acquisitionDate;
+    @Column (name = "acquisition_date")
+    private LocalDate acquisitionDate;
 
-   @Column (name = "acquisition_age")
-   private int acquisitionAge;
+    @Column (name = "acquisition_age")
+    private int acquisitionAge;
 
-   @Column (name = "status")
-   private String status;
+    @Column (name = "status")
+    private String status;
 
 
+    @OneToMany (targetEntity = WateringEntity.class)
+    @OrderBy
+    private List<WateringEntity> listeWatering;
 
 
     public BonsaiEntity(){
 
-   }
+    }
 
     public UUID getId() {
         return id;
@@ -52,7 +59,7 @@ public class BonsaiEntity {
 
     public void setName(String name) {
         this.name = name;
-   }
+    }
 
     public String getSpecies() {
         return species;
@@ -62,11 +69,11 @@ public class BonsaiEntity {
         this.species = species;
     }
 
-    public String getAcquisitionDate() {
+    public LocalDate getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(String acquisitionDate) {
+    public void setAcquisitionDate(LocalDate acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 
@@ -86,7 +93,15 @@ public class BonsaiEntity {
         this.status = status;
     }
 
-   /* public UUID getOwnerId() {
+    public List<WateringEntity> getListeWatering() {
+        return listeWatering;
+    }
+
+    public void setListeWatering(List<WateringEntity> listeWatering) {
+        this.listeWatering = listeWatering;
+    }
+
+    /* public UUID getOwnerId() {
         return ownerId;
     }
 

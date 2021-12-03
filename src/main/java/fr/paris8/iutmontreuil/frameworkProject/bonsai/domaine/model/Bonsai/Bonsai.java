@@ -1,5 +1,9 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class Bonsai {
@@ -10,13 +14,15 @@ public class Bonsai {
 
     private String species;
 
-    private String acquisitionDate;
+    private LocalDate acquisitionDate;
 
     private int acquisitionAge;
 
     private String status;
 
     private UUID ownerId;
+
+    private List<WateringEntity> listeWatering;
 
     public Bonsai(){
 
@@ -46,11 +52,11 @@ public class Bonsai {
         this.species = species;
     }
 
-    public String getAcquisitionDate() {
+    public LocalDate getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(String acquisitionDate) {
+    public void setAcquisitionDate(LocalDate acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 
@@ -68,6 +74,14 @@ public class Bonsai {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<WateringEntity> getListeWatering() {
+        return listeWatering;
+    }
+
+    public void setListeWatering(List<WateringEntity> listeWatering) {
+        this.listeWatering = listeWatering;
     }
 
     public UUID getOwnerId() {

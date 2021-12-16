@@ -1,6 +1,6 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Watering;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.WateringDTO;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 

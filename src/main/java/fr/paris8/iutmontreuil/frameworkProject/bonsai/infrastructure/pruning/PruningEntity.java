@@ -18,6 +18,8 @@ public class PruningEntity {
     private UUID id;
     @Column(name = "pruning_date")
     private Date pruningDate;
+    @Column(name = "bonsai_id")
+    private UUID bonsai_id;
 
 
     public PruningEntity() {
@@ -39,5 +41,11 @@ public class PruningEntity {
         this.pruningDate = pruning_date;
     }
 
+    public UUID getBonsai_id() {
+        return bonsai_id;
+    }
 
+    public void setBonsai_id(UUID bonsai_id) {
+        this.bonsai_id = bonsai_id;
+    }
 }

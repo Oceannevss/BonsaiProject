@@ -39,4 +39,11 @@ public class RepottingEntity {
         this.repottingDate = repotting_date;
     }
 
+    public UUID getBonsai_id() {
+        return bonsai_id;
+    }
+
+    public void setBonsai_id(UUID bonsai_id) {
+        this.bonsai_id = bonsai_id;
+    }
 }

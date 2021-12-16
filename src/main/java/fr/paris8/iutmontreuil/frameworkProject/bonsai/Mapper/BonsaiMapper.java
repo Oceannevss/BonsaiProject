@@ -1,6 +1,6 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.BonsaiDTO;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
 

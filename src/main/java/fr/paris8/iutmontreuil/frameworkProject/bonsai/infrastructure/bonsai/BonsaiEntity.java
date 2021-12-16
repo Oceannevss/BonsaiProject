@@ -1,6 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Watering;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -40,6 +41,13 @@ public class BonsaiEntity {
     @OrderBy
     private List<WateringEntity> listeWatering;
 
+    @OneToMany (targetEntity = RepottingEntity.class)
+    @OrderBy
+    private List<RepottingEntity> listeRepotting;
+
+    @OneToMany (targetEntity = PruningEntity.class)
+    @OrderBy
+    private List<PruningEntity> listePrunnig;
 
     public BonsaiEntity(){
 
@@ -99,6 +107,22 @@ public class BonsaiEntity {
 
     public void setListeWatering(List<WateringEntity> listeWatering) {
         this.listeWatering = listeWatering;
+    }
+
+    public List<RepottingEntity> getListeRepotting() {
+        return listeRepotting;
+    }
+
+    public void setListeRepotting(List<RepottingEntity> listeRepotting) {
+        this.listeRepotting = listeRepotting;
+    }
+
+    public List<PruningEntity> getListePrunnig() {
+        return listePrunnig;
+    }
+
+    public void setListePrunnig(List<PruningEntity> listePrunnig) {
+        this.listePrunnig = listePrunnig;
     }
 
     /* public UUID getOwnerId() {

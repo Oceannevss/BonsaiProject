@@ -4,16 +4,13 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.PruningMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.RepottingMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.WateringMapper;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai.Bonsai;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.pruning.Pruning;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.repotting.Repotting;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.watering.Watering;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,6 +75,25 @@ public class BonsaiRepository {
     public  Bonsai statusUpdate (Bonsai bonsai){
 
         return BonsaiMapper.EntityToBonsai(bonsaiDao.save(BonsaiMapper.BonsaiToEntity(bonsai)));
+    }
+
+
+    public List<Watering> findWateringById(UUID id) {
+        return wateringDao.findAll().stream()
+                .map(WateringMapper::entityToWatering)
+                .collect(Collectors.toList());
+    }
+
+    public List<Repotting> findRepottingById(UUID id) {
+        return repottingDao.findAll().stream()
+                .map(RepottingMapper::entityToRepotting)
+                .collect(Collectors.toList());
+    }
+
+    public List<Pruning> findPruningById(UUID id) {
+        return pruningDao.findAll().stream()
+                .map(PruningMapper::entityToPruning)
+                .collect(Collectors.toList());
     }
 
 }

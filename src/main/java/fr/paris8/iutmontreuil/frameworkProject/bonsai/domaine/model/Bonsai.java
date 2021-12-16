@@ -1,5 +1,7 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 
 import java.time.LocalDate;
@@ -23,6 +25,10 @@ public class Bonsai {
     private UUID ownerId;
 
     private List<WateringEntity> listeWatering;
+
+    private List<RepottingEntity> listRepottings;
+
+    private List<PruningEntity> listPrunings;
 
     public Bonsai(){
 
@@ -82,6 +88,22 @@ public class Bonsai {
 
     public void setListeWatering(List<WateringEntity> listeWatering) {
         this.listeWatering = listeWatering;
+    }
+
+    public List<RepottingEntity> getListRepottings() {
+        return listRepottings;
+    }
+
+    public void setListRepottings(List<RepottingEntity> listRepottings) {
+        this.listRepottings = listRepottings;
+    }
+
+    public List<PruningEntity> getListPrunings() {
+        return listPrunings;
+    }
+
+    public void setListPrunings(List<PruningEntity> listPrunings) {
+        this.listPrunings = listPrunings;
     }
 
     public UUID getOwnerId() {

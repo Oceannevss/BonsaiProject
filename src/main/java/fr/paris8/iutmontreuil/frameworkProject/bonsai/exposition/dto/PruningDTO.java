@@ -9,6 +9,8 @@ public class PruningDTO {
 
     private Date pruningDate;
 
+    private UUID bonsai_id;
+
     public PruningDTO(){
 
     }
@@ -27,5 +29,13 @@ public class PruningDTO {
 
     public void setPruningDate(Date pruningDate) {
         this.pruningDate = pruningDate;
+    }
+
+    public UUID getBonsai_id() {
+        return bonsai_id;
+    }
+
+    public void setBonsai_id(UUID bonsai_id) {
+        this.bonsai_id = bonsai_id;
     }
 }

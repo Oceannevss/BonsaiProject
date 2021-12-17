@@ -1,6 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning;
 
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,8 +19,9 @@ public class PruningEntity {
     private UUID id;
     @Column(name = "pruning_date")
     private Date pruningDate;
-    @Column(name = "bonsai_id")
-    private UUID bonsai_id;
+    @ManyToOne
+    @JoinColumn(name = "bonsai_id")
+    private BonsaiEntity bonsai;
 
 
     public PruningEntity() {
@@ -41,11 +43,11 @@ public class PruningEntity {
         this.pruningDate = pruning_date;
     }
 
-    public UUID getBonsai_id() {
-        return bonsai_id;
+    public BonsaiEntity getBonsai() {
+        return bonsai;
     }
 
-    public void setBonsai_id(UUID bonsai_id) {
-        this.bonsai_id = bonsai_id;
+    public void setBonsai(BonsaiEntity bonsai) {
+        this.bonsai = bonsai;
     }
 }

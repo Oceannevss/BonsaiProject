@@ -7,7 +7,7 @@ public class WateringDTO {
 
     private UUID id;
     private Date wateringDate;
-    private UUID bonsai_id;
+
 
     public WateringDTO(){
 
@@ -29,11 +29,4 @@ public class WateringDTO {
         this.wateringDate = wateringDate;
     }
 
-    public UUID getBonsai_id() {
-        return bonsai_id;
-    }
-
-    public void setBonsai_id(UUID bonsai_id) {
-        this.bonsai_id = bonsai_id;
-    }
 }

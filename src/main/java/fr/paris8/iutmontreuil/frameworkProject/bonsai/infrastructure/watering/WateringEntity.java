@@ -1,8 +1,10 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,8 +19,9 @@ public class WateringEntity {
         private UUID id;
         @Column(name = "watering_date")
         private Date wateringDate;
-        @Column(name = "bonsai_id")
-        private UUID bonsai_id;
+        @ManyToOne
+        @JoinColumn(name = "bonsai_id")
+        private BonsaiEntity bonsai;
 
 
 
@@ -41,12 +44,11 @@ public class WateringEntity {
             this.wateringDate = watering_date;
         }
 
-        public UUID getBonsai_id() {
-            return bonsai_id;
+        public BonsaiEntity getBonsai_id() {
+            return bonsai;
         }
 
-        public void setBonsai_id(UUID bonsai_id) {
-            this.bonsai_id = bonsai_id;
+        public void setBonsai_id(BonsaiEntity bonsai_id) {
+            this.bonsai = bonsai_id;
         }
-
 }

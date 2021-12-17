@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,21 +36,33 @@ public class BonsaiService {
     }
 
 
-    public Optional<Bonsai> findById(@PathVariable("uuid") UUID uuid) {
+    public Optional<Bonsai> findById(UUID uuid) {
         return bonsaiRepository.findById(uuid);
     }
 
 
-    public Bonsai create(@RequestBody Bonsai bonsai){
+    public Bonsai create(Bonsai bonsai){
 
        return bonsaiRepository.create(bonsai);
 
     }
 
+   /* public Bonsai createTest(String name, String species, String acquisition_date, String acquisition_age, String owner_id){
 
-    public void delete(UUID uuid){
+        Bonsai bonsai = new Bonsai();
+        bonsai.setName(name);
+        bonsai.setSpecies(species);
+        LocalDate localDate = LocalDate.parse(acquisition_date);
+        bonsai.setAcquisitionDate(localDate);
+        bonsai.setAcquisitionAge(Integer.parseInt(acquisition_age));
+        bonsai.setOwnerId(null);
+        return bonsaiRepository.create(bonsai);
+    }*/
 
-        bonsaiRepository.delete(uuid);
+
+    public void deleteById(UUID uuid){
+
+        bonsaiRepository.deleteById(uuid);
     }
 
     public Optional<Bonsai> update(UUID id, Bonsai bonsai) {
@@ -65,45 +79,66 @@ public class BonsaiService {
         return bonsaiUpdate;
     }
 
-    public Optional<Bonsai> statusUpdate(UUID id, Bonsai bonsai){
+    public Optional<Bonsai> statusUpdate(UUID id, String status){
 
         Optional<Bonsai> bonsaiUpdate = bonsaiRepository.findById(id);
 
         if(bonsaiUpdate.isPresent()){
-            do{
-                bonsaiUpdate.get().setStatus(bonsai.getStatus());
-            }while( (bonsai.getStatus() != "dead") || (bonsai.getStatus() != "alive") || (bonsai.getStatus() != "unknown") );
 
-            return  Optional.of(bonsaiRepository.update(bonsaiUpdate.get()));
+            if(status.equals("dead") || status.equals("alive") || status.equals("unknown")){
+
+                bonsaiUpdate.get().setStatus(status);
+
+                return  Optional.of(bonsaiRepository.statusUpdate(bonsaiUpdate.get()));
+            }
         }
 
         return bonsaiUpdate;
     }
 
-    public List<Watering> findWateringById(@PathVariable("uuid") UUID uuid) {
+    public List<Watering> findWateringById(UUID uuid) {
         return bonsaiRepository.findWateringById(uuid);
     }
 
-    /*public List<Repotting> findRepottingById(@PathVariable("uuid") UUID uuid) {
+    public List<Watering> getWaterings(){
+        return bonsaiRepository.getWaterings();
+    }
+
+    public Optional<Watering> getLastWatering(UUID uuid) {
 
         Optional<Bonsai> bonsai = bonsaiRepository.findById(uuid);
 
-        if(bonsai.isPresent()){
-
-            return bonsai.get().getListRepottings().stream()
-                    .map(RepottingMapper::entityToRepotting)
-                    .collect(Collectors.toList());
-        }else {
-            return null;
+        if (bonsai.isPresent()) {
+            return Optional.of(bonsaiRepository.findWateringById(bonsai.map(Bonsai::getId).get()).get(0));
         }
-    }*/
+        return Optional.empty();
+    }
 
-    public List<Repotting> findRepottingById(@PathVariable("uuid") UUID uuid) {
+    public List<Repotting> findRepottingById(UUID uuid) {
         return bonsaiRepository.findRepottingById(uuid);
     }
 
+    public Optional<Repotting> getLastRepotting(UUID uuid) {
 
-    public List<Pruning> findPruningById(@PathVariable("uuid") UUID uuid){
+        Optional<Bonsai> bonsai = bonsaiRepository.findById(uuid);
+
+        if (bonsai.isPresent()) {
+            return Optional.of(bonsaiRepository.findRepottingById(uuid).get(0));
+        }
+        return Optional.empty();
+    }
+
+    public List<Pruning> findPruningById(UUID uuid){
         return bonsaiRepository.findPruningById(uuid);
+    }
+
+    public Optional<Pruning> getLastPruning(UUID uuid) {
+
+        Optional<Bonsai> bonsai = bonsaiRepository.findById(uuid);
+
+        if (bonsai.isPresent()) {
+            return Optional.of(bonsaiRepository.findPruningById(uuid).get(0));
+        }
+        return Optional.empty();
     }
 }

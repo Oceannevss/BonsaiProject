@@ -14,6 +14,7 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.Wa
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class BonsaiRepository {
                         .collect(Collectors.toList());
     }
 
-    public Optional<Bonsai> findById(@PathVariable("uuid") UUID uuid) {
+    public Optional<Bonsai> findById(UUID uuid) {
 
         Optional<BonsaiEntity> res = bonsaiDao.findById(uuid);
 
@@ -53,7 +54,7 @@ public class BonsaiRepository {
 
     }
 
-    public Bonsai create(@RequestBody Bonsai bonsai){
+    public Bonsai create(Bonsai bonsai){
 
         BonsaiEntity bonsaiEntity = BonsaiMapper.BonsaiToEntity(bonsai);
         BonsaiEntity save = bonsaiDao.save(bonsaiEntity);
@@ -62,7 +63,7 @@ public class BonsaiRepository {
 
     }
 
-    public void delete(UUID uuid){
+    public void deleteById(UUID uuid){
 
         bonsaiDao.deleteById(uuid);
     }
@@ -72,13 +73,28 @@ public class BonsaiRepository {
         return BonsaiMapper.EntityToBonsai(bonsaiDao.save(BonsaiMapper.BonsaiToEntity(bonsai)));
     }
 
-    public  Bonsai statusUpdate (Bonsai bonsai){
+    public Bonsai statusUpdate (Bonsai bonsai){
 
         return BonsaiMapper.EntityToBonsai(bonsaiDao.save(BonsaiMapper.BonsaiToEntity(bonsai)));
     }
 
 
-    public List<Watering> findWateringById(UUID id) {
+    public List<Watering> findWateringById(UUID uuid) {
+
+        Optional<BonsaiEntity> bonsaiEntity = bonsaiDao.findById(uuid);
+
+       return wateringDao.findAll().stream()
+                .map(WateringMapper::entityToWatering)
+                .collect(Collectors.toList());
+
+       /* return wateringDao.findAllById(bonsaiEntity.get().getId().)
+                .stream()
+                .map(WateringMapper::entityToWatering)
+                .collect(Collectors.toList());*/
+
+    }
+
+    public List<Watering> getWaterings(){
         return wateringDao.findAll().stream()
                 .map(WateringMapper::entityToWatering)
                 .collect(Collectors.toList());

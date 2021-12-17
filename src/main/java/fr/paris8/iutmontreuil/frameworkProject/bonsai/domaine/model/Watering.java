@@ -1,5 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -7,7 +9,7 @@ public class Watering {
 
     private UUID id;
     private Date wateringDate;
-    private UUID bonsai_id;
+    private Bonsai bonsai_id;
 
     public Watering() {
     }
@@ -28,11 +30,11 @@ public class Watering {
         this.wateringDate = wateringDate;
     }
 
-    public UUID getBonsai_id() {
+    public Bonsai getBonsai_id() {
         return bonsai_id;
     }
 
-    public void setBonsai_id(UUID bonsai_id) {
+    public void setBonsai_id(Bonsai bonsai_id) {
         this.bonsai_id = bonsai_id;
     }
 }

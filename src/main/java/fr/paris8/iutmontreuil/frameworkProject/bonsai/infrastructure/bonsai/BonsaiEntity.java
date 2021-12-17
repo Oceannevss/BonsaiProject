@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -36,18 +37,14 @@ public class BonsaiEntity {
     @Column (name = "status")
     private String status;
 
-
-    @OneToMany (targetEntity = WateringEntity.class)
-    @OrderBy
+    @OneToMany (targetEntity = WateringEntity.class, mappedBy = "bonsai")
     private List<WateringEntity> listeWatering;
 
-    @OneToMany (targetEntity = RepottingEntity.class)
-    @OrderBy
+    @OneToMany (targetEntity = RepottingEntity.class, mappedBy = "bonsai")
     private List<RepottingEntity> listeRepotting;
 
-    @OneToMany (targetEntity = PruningEntity.class)
-    @OrderBy
-    private List<PruningEntity> listePrunnig;
+    @OneToMany (targetEntity = PruningEntity.class, mappedBy = "bonsai")
+    private List<PruningEntity> listePruning;
 
     public BonsaiEntity(){
 
@@ -109,6 +106,7 @@ public class BonsaiEntity {
         this.listeWatering = listeWatering;
     }
 
+
     public List<RepottingEntity> getListeRepotting() {
         return listeRepotting;
     }
@@ -117,13 +115,14 @@ public class BonsaiEntity {
         this.listeRepotting = listeRepotting;
     }
 
-    public List<PruningEntity> getListePrunnig() {
-        return listePrunnig;
+    public List<PruningEntity> getListePruning() {
+        return listePruning;
     }
 
-    public void setListePrunnig(List<PruningEntity> listePrunnig) {
-        this.listePrunnig = listePrunnig;
+    public void setListePruning(List<PruningEntity> listePruning) {
+        this.listePruning = listePruning;
     }
+
 
     /* public UUID getOwnerId() {
         return ownerId;

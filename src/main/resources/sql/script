@@ -61,3 +61,7 @@ insert into pruning (id, bonsai_id, pruning_date) values ('33c6edc2-5440-11ec-bf
 '22dd930c-fe5d-497d-9b60-462f2083541d','2022-07-21');
 insert into repotting (id, bonsai_id, repotting_date) values ('33c6eed0-5440-11ec-bf63-0242ac130002',
 '22dd930c-fe5d-497d-9b60-462f2083541d', '2022-07-24');
+
+
+insert into bonsai (id, name, species, acquisition_date, acquisition_age, status) values ('53da5ad0-5f13-11ec-bf63-0242ac130002', 'Jack', 'Jade tree', '02-07-2022', 18 , 'alive');
+insert into pruning (id, bonsai_id, pruning_date) values ('6a1a68da-5f13-11ec-bf63-0242ac130002','53da5ad0-5f13-11ec-bf63-0242ac130002','2022-05-10');

@@ -6,10 +6,19 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.RepottingMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.WateringMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.BonsaiService;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,10 +55,15 @@ public class BonsaiController {
     public ResponseEntity<BonsaiDTO> findById(@PathVariable("uuid") UUID uuid) {
 
             Optional<Bonsai> bonsai = bonsaiService.findById(uuid);
-          return bonsai.map(bonsai1 -> BonsaiMapper.bonsaiToDto(bonsai1))
-                    .map(bonsaiDTO -> ResponseEntity.ok(bonsaiDTO))
-                    .orElse(ResponseEntity.notFound().build());
 
+          return bonsai.map(bonsai1 -> {
+              BonsaiDTO bonsaiDTO = BonsaiMapper.bonsaiToDto(bonsai1);
+              bonsaiDTO.setLastWatering(bonsaiService.getLastWatering(bonsai1.getId()).map(Watering::getWateringDate).get());
+              bonsaiDTO.setLastRepotting(bonsaiService.getLastRepotting(bonsai1.getId()).map(Repotting::getRepottingDate).get());
+              bonsaiDTO.setLastPruning(bonsaiService.getLastPruning(bonsai1.getId()).map(Pruning::getPruningDate).get());
+            return ResponseEntity.ok(bonsaiDTO);
+          })
+                    .orElse(ResponseEntity.notFound().build());
 
     }
 
@@ -63,10 +77,17 @@ public class BonsaiController {
 
    }
 
-   @DeleteMapping("/{uuid}")
-    public void delete(@PathVariable UUID uuid){
+  /* @PostMapping
+   public ResponseEntity<BonsaiDTO> createTest(@RequestBody String name, String species, String acquisition_date, String acquisition_age, String owner_id){
+        Bonsai bonsai = bonsaiService.createTest(name, species, acquisition_date, acquisition_age, owner_id);
+        BonsaiDTO bonsaiDTO = BonsaiMapper.bonsaiToDto(bonsai);
+        return ResponseEntity.ok(bonsaiDTO);
+   }*/
 
-         bonsaiService.delete(uuid);
+   @DeleteMapping("/{uuid}")
+    public void deleteById(@PathVariable UUID uuid){
+
+         bonsaiService.deleteById(uuid);
    }
 
     @PatchMapping("/{uuid}")
@@ -78,22 +99,12 @@ public class BonsaiController {
     }
 
     @PutMapping("/{uuid}/status")
-    public  ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody  BonsaiDTO bonsaiDTO){
+    public  ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody String status){
 
-        return bonsaiService.update(uuid, BonsaiMapper.DtoToBonsai(bonsaiDTO))
+        return bonsaiService.statusUpdate(uuid, status)
                             .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))
                             .orElse(ResponseEntity.notFound().build());
     }
-
-   /* @GetMapping("/{uuid}/watering")
-    public ResponseEntity<WateringDTO> findWateringById(@PathVariable("uuid") UUID uuid){
-
-        Optional<Watering> watering = bonsaiService.findWateringById(uuid);
-
-        return watering.map(watering1 -> WateringMapper.wateringToDto(watering1))
-                        .map(wateringDTO -> ResponseEntity.ok(wateringDTO))
-                        .orElse(ResponseEntity.notFound().build());
-    }*/
 
     @GetMapping("/{uuid}/watering")
     public List<WateringDTO> findWateringById(@PathVariable("uuid") UUID uuid) {
@@ -103,16 +114,13 @@ public class BonsaiController {
                 .collect(Collectors.toList());
     }
 
-   /* @GetMapping("/{uuid}/watering")
-    public ResponseEntity<BonsaiDTO> findWateringById(@PathVariable("uuid") UUID uuid) {
-
-        Optional<Bonsai> bonsai = bonsaiService.findById(uuid);
-        return bonsai.map(bonsai1 -> BonsaiMapper.bonsaiToDto(bonsai1))
-                .map(bonsaiDTO -> ResponseEntity.ok(bonsaiDTO))
-                .orElse(ResponseEntity.notFound().build());
-
-
-    }*/
+    @GetMapping("/watering")
+    public List<WateringDTO> getWaterings(){
+        return bonsaiService.getWaterings()
+                .stream()
+                .map(WateringMapper::wateringToDto)
+                .collect(Collectors.toList());
+    }
 
     @GetMapping("{uuid}/repotting")
     public List<RepottingDTO> findRepottingById(@PathVariable UUID uuid){
@@ -129,20 +137,5 @@ public class BonsaiController {
               .map(PruningMapper::pruningToDto)
               .collect(Collectors.toList());
     }
-
-    /*@GetMapping("/{id}/watering")
-    public List<WateringDto> getWaterings(@PathVariable UUID id) {
-        return bonsaiService.getWaterings(id).stream().map(BonsaiMapper::toWateringDto).collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}/repotting")
-    public List<RepottingDto> getRepottings(@PathVariable UUID id) {
-        return bonsaiService.getRepottings(id).stream().map(BonsaiMapper::toRepottingDto).collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}/pruning")
-    public List<PruningDto> getPrunings(@PathVariable UUID id) {
-        return bonsaiService.getPrunings(id).stream().map(BonsaiMapper::toPruningDto).collect(Collectors.toList());
-    }*/
 
 }

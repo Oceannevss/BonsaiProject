@@ -24,11 +24,11 @@ public class Bonsai {
 
     private UUID ownerId;
 
-    private List<WateringEntity> listeWatering;
+    private List<Watering> listeWatering;
 
-    private List<RepottingEntity> listRepottings;
+    private List<Repotting> listRepottings;
 
-    private List<PruningEntity> listPrunings;
+    private List<Pruning> listPrunings;
 
     public Bonsai(){
 
@@ -82,27 +82,27 @@ public class Bonsai {
         this.status = status;
     }
 
-    public List<WateringEntity> getListeWatering() {
+    public List<Watering> getListeWatering() {
         return listeWatering;
     }
 
-    public void setListeWatering(List<WateringEntity> listeWatering) {
+    public void setListeWatering(List<Watering> listeWatering) {
         this.listeWatering = listeWatering;
     }
 
-    public List<RepottingEntity> getListRepottings() {
+    public List<Repotting> getListRepottings() {
         return listRepottings;
     }
 
-    public void setListRepottings(List<RepottingEntity> listRepottings) {
+    public void setListRepottings(List<Repotting> listRepottings) {
         this.listRepottings = listRepottings;
     }
 
-    public List<PruningEntity> getListPrunings() {
+    public List<Pruning> getListPrunings() {
         return listPrunings;
     }
 
-    public void setListPrunings(List<PruningEntity> listPrunings) {
+    public void setListPrunings(List<Pruning> listPrunings) {
         this.listPrunings = listPrunings;
     }
 

@@ -1,6 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class BonsaiDTO {
@@ -18,6 +19,10 @@ public class BonsaiDTO {
     private String status;
 
     private UUID ownerId;
+
+    private Date lastWatering;
+    private Date lastRepotting;
+    private Date lastPruning;
 
     public BonsaiDTO(){
 
@@ -77,5 +82,29 @@ public class BonsaiDTO {
 
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public Date getLastWatering() {
+        return lastWatering;
+    }
+
+    public void setLastWatering(Date lastWatering) {
+        this.lastWatering = lastWatering;
+    }
+
+    public Date getLastRepotting() {
+        return lastRepotting;
+    }
+
+    public void setLastRepotting(Date lastRepotting) {
+        this.lastRepotting = lastRepotting;
+    }
+
+    public Date getLastPruning() {
+        return lastPruning;
+    }
+
+    public void setLastPruning(Date lastPruning) {
+        this.lastPruning = lastPruning;
     }
 }

@@ -2,7 +2,7 @@ package fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.BonsaiDTO;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.BonsaiEntity;
 
 public class BonsaiMapper {
 

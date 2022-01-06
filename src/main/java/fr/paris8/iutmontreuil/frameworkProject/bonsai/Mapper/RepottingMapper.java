@@ -2,7 +2,7 @@ package fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.RepottingDTO;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.RepottingEntity;
 
 public class RepottingMapper {
 

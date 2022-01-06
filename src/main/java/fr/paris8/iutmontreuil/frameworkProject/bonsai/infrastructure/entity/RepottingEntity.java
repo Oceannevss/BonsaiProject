@@ -1,6 +1,5 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

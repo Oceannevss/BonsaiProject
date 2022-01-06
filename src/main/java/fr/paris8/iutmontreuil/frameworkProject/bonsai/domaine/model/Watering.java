@@ -1,7 +1,5 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiEntity;
-
 import java.util.Date;
 import java.util.UUID;
 

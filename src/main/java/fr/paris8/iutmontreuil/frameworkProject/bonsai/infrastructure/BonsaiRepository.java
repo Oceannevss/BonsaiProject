@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.PruningMapper;
@@ -8,13 +8,13 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingDao;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringDao;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.DAO.BonsaiDao;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.BonsaiEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.DAO.PruningDao;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.DAO.RepottingDao;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.DAO.WateringDao;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

@@ -4,13 +4,10 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai.BonsaiRepository;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.BonsaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

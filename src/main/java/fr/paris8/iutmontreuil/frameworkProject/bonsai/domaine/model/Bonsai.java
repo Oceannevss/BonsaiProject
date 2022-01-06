@@ -1,9 +1,5 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;

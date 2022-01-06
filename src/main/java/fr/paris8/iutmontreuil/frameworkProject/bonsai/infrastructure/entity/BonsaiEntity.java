@@ -1,13 +1,9 @@
-package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.bonsai;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity;
 
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.repotting.RepottingEntity;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.watering.WateringEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;

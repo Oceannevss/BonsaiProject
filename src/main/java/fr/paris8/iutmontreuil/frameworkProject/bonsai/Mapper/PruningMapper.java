@@ -2,7 +2,7 @@ package fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.PruningDTO;
-import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.pruning.PruningEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.PruningEntity;
 
 public class PruningMapper {
 

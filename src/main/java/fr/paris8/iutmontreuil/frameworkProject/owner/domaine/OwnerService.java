@@ -31,11 +31,11 @@ public class OwnerService {
         return ownerRepository.create(owner);
     }
 
-    /*public List<Bonsai> getBonsais(UUID id) {
-        return ownerRepository.getBonsais(id);
+    public List<Bonsai> getBonsais(UUID uuid) {
+        return ownerRepository.getBonsais(uuid);
     }
 
-    public Optional<Bonsai> transferBonsai(UUID owner_id, UUID bonsai_id, Owner new_owner) {
+   /* public Optional<Bonsai> transferBonsai(UUID owner_id, UUID bonsai_id, Owner new_owner) {
 
 
 

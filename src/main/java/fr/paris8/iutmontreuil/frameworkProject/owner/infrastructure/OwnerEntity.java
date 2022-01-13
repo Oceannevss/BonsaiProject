@@ -1,8 +1,10 @@
 package fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure;
 
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.BonsaiEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "owner")
@@ -16,6 +18,8 @@ public class OwnerEntity {
     private UUID id;
     @Column(name = "name")
     private String name;
+    @OneToMany (targetEntity = BonsaiEntity.class, mappedBy = "ownerId")
+    private List<BonsaiEntity> listBonsais ;
 
     public UUID getId() {
         return id;
@@ -31,5 +35,13 @@ public class OwnerEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<BonsaiEntity> getListBonsais() {
+        return listBonsais;
+    }
+
+    public void setListBonsais(List<BonsaiEntity> listBonsais) {
+        this.listBonsais = listBonsais;
     }
 }

@@ -1,5 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model;
 
+import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +20,7 @@ public class Bonsai {
 
     private String status;
 
-    private UUID ownerId;
+    private Owner ownerId;
 
     private List<Watering> listeWatering;
 
@@ -102,11 +104,11 @@ public class Bonsai {
         this.listPrunings = listPrunings;
     }
 
-    public UUID getOwnerId() {
+    public Owner getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(UUID ownerId) {
+    public void setOwnerId(Owner ownerId) {
         this.ownerId = ownerId;
     }
 

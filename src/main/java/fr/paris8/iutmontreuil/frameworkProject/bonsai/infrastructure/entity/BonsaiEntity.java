@@ -1,5 +1,6 @@
 package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity;
 
+import fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure.OwnerEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -41,6 +42,10 @@ public class BonsaiEntity {
 
     @OneToMany (targetEntity = PruningEntity.class, mappedBy = "bonsai")
     private List<PruningEntity> listePruning;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private OwnerEntity ownerId;
 
     public BonsaiEntity(){
 
@@ -120,11 +125,11 @@ public class BonsaiEntity {
     }
 
 
-    /* public UUID getOwnerId() {
+    public OwnerEntity getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(UUID ownerId) {
+    public void setOwnerId(OwnerEntity ownerId) {
         this.ownerId = ownerId;
-    }*/
+    }
 }

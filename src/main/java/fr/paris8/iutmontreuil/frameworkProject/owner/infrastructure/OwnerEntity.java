@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.frameworkProject.owner;
+package fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure;
 
 import org.hibernate.annotations.GenericGenerator;
 

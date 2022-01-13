@@ -1,4 +1,4 @@
-package fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure;
+package fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.BonsaiEntity;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,7 +18,7 @@ public class OwnerEntity {
     private UUID id;
     @Column(name = "name")
     private String name;
-    @OneToMany (targetEntity = BonsaiEntity.class, mappedBy = "ownerId")
+    @OneToMany (targetEntity = BonsaiEntity.class, mappedBy = "owner")
     private List<BonsaiEntity> listBonsais ;
 
     public UUID getId() {

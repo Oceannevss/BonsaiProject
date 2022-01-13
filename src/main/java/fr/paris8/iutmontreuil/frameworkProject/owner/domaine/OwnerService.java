@@ -20,6 +20,7 @@ public class OwnerService {
     }
 
     public List<Owner> findAll() {
+
         return ownerRepository.findAll();
     }
 
@@ -28,22 +29,42 @@ public class OwnerService {
     }
 
     public Owner create(Owner owner) {
+
         return ownerRepository.create(owner);
     }
 
     public List<Bonsai> getBonsais(UUID uuid) {
+
         return ownerRepository.getBonsais(uuid);
     }
 
-   /* public Optional<Bonsai> transferBonsai(UUID owner_id, UUID bonsai_id, Owner new_owner) {
+   public Optional<Bonsai> transferBonsaiToOwner(UUID owner_id, UUID bonsai_id, Owner new_owner) {
 
+        Optional<Owner> owner = ownerRepository.findById(owner_id);
+        Optional<Bonsai> bonsai = ownerRepository.findBonsaiById(bonsai_id);
+
+        if (bonsai.isPresent() && owner.isPresent()) {
+
+            return Optional.of(ownerRepository.transferBonsaiToOwner(new_owner, bonsai.get()));
+        }
 
 
         return Optional.empty();
     }
 
-    public List<Bonsai> addBonsai(UUID owner_id, List<Bonsai> bonsais) {
+    public List<Bonsai> addBonsaiToOwner(UUID owner_id, List<Bonsai> bonsais) {
 
-        return bonsais;
-    }*/
+        List<Bonsai> listeBonsais = new ArrayList<>();
+        Optional<Owner> owner = ownerRepository.findById(owner_id);
+
+        if(owner.isPresent()){
+            for(Bonsai b : bonsais){
+                if(b.getOwnerId() != null){
+                    listeBonsais.add(ownerRepository.addBonsaiToOwner(owner.get(),b));
+                }
+            }
+        }
+
+        return listeBonsais;
+    }
 }

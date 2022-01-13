@@ -3,7 +3,7 @@ package fr.paris8.iutmontreuil.frameworkProject.owner.Mapper;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
 import fr.paris8.iutmontreuil.frameworkProject.owner.exposition.OwnerDTO;
-import fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure.OwnerEntity;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.OwnerEntity;
 
 import java.util.stream.Collectors;
 

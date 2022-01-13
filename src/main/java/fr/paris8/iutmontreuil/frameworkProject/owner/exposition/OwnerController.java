@@ -1,6 +1,7 @@
 package fr.paris8.iutmontreuil.frameworkProject.owner.exposition;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.BonsaiDTO;
 import fr.paris8.iutmontreuil.frameworkProject.owner.Mapper.OwnerMapper;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -48,18 +50,29 @@ public class OwnerController {
 
     @GetMapping("/{uuid}/bonsais")
     public List<BonsaiDTO> getBonsais(@PathVariable UUID id) {
-        return ownerService.getBonsais(id).stream().map(BonsaiMapper::bonsaiToDto).collect(Collectors.toList());
+
+        return ownerService.getBonsais(id)
+                            .stream()
+                            .map(BonsaiMapper::bonsaiToDto)
+                            .collect(Collectors.toList());
+
     }
 
-    /*@PostMapping("/{owner_id}/bonsais/{bonsai_id}/transfer")
-    public ResponseEntity<BonsaiDTO> transferBonsai(@PathVariable UUID owner_id, @PathVariable UUID bonsai_id, @RequestBody Owner new_owner) {
+    @PostMapping("/{owner_id}/bonsais/{bonsai_id}/transfer")
+    public ResponseEntity<BonsaiDTO> transferBonsaiToOwner(@PathVariable UUID owner_id, @PathVariable UUID bonsai_id, @RequestBody Owner new_owner) {
 
+        return ownerService.transferBonsaiToOwner(owner_id,bonsai_id,new_owner)
+                            .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))
+                            .orElse(ResponseEntity.notFound().build());
 
     }
 
     @PostMapping("/{owner_id}/bonsais")
-    public List<BonsaiDto> addBonsai(@PathVariable UUID owner_id, @RequestBody List<Bonsai> bonsais) {
+    public List<BonsaiDTO> addBonsaiToOwner(@PathVariable UUID owner_id, @RequestBody List<Bonsai> bonsais) {
 
-        return ownerService.addBonsai(owner_id, bonsais).stream().map(OwnerMapper::toBonsaiDto).collect(Collectors.toList());
-    }*/
+        return ownerService.addBonsaiToOwner(owner_id,bonsais)
+                            .stream()
+                            .map(BonsaiMapper::bonsaiToDto)
+                            .collect(Collectors.toList());
+    }
 }

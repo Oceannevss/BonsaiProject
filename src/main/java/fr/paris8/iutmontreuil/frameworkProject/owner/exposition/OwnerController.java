@@ -8,6 +8,7 @@ import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.OwnerService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

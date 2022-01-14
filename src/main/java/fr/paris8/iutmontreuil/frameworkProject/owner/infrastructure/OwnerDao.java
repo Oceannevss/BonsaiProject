@@ -24,5 +24,6 @@ public interface OwnerDao extends JpaRepository<OwnerEntity, UUID> {
     @Query("update bonsai set owner_id = :owner_id WHERE id = :bonsai_id")
     public void addNewBonsai(@Param("owner_id") UUID owner_id, @Param("bonsai_id") UUID bonsai_id);
 
+    //https://www.it-swarm-fr.com/fr/mysql/creer-une-requete-personnalisee-avec-spring-data-jpa/831218359/
 
 }

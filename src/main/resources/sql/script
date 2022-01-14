@@ -67,3 +67,21 @@ insert into bonsai (id, name, species, acquisition_date, acquisition_age, status
 insert into pruning (id, bonsai_id, pruning_date) values ('6a1a68da-5f13-11ec-bf63-0242ac130002','53da5ad0-5f13-11ec-bf63-0242ac130002','2022-05-10');
 
 insert into owner (id, name, bonsai_id) values ('2fcb5e5a-7520-11ec-90d6-0242ac120003','Marco', (SELECT id from bonsai where name = 'Jack'));
+
+CREATE TABLE authority (
+    id UUID PRIMARY KEY,
+    authority VARCHAR(15)
+);
+
+CREATE TABLE users (
+    id UUID PRIMARY KEY,
+    username VARCHAR(200),
+    password VARCHAR(200),
+    enabled BIT
+);
+
+INSERT INTO authority (id, authority) values (
+    ("1c76b448-753f-11ec-90d6-0242ac120003", ""),
+    ("1c76b664-753f-11ec-90d6-0242ac120003"),
+    ("1c76b7b8-753f-11ec-90d6-0242ac120003")
+)

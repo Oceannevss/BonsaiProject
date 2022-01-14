@@ -7,4 +7,7 @@ import java.util.UUID;
 
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, UUID> {
+
+    UserEntity findByUsername(String s);
+
 }

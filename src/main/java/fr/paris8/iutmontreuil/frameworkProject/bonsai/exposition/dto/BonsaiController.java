@@ -99,7 +99,7 @@ public class BonsaiController {
     }
 
     @PutMapping("/{uuid}/status")
-    public  ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody String status){
+    public ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody String status){
 
         return bonsaiService.statusUpdate(uuid, status)
                             .map(bonsai -> ResponseEntity.ok(BonsaiMapper.bonsaiToDto(bonsai)))

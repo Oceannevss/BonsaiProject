@@ -19,9 +19,6 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "enabled")
-    private boolean enabled;
-
     @OneToMany(mappedBy = "authorityId.uuid", cascade = {CascadeType.ALL})
     private List<AuthorityEntity> authorities;
 
@@ -48,14 +45,6 @@ public class UserEntity {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public List<AuthorityEntity> getAuthorities() {

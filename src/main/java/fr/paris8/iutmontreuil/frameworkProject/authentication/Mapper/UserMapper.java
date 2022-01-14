@@ -31,7 +31,7 @@ public class UserMapper {
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
-        userDto.setAuthorities(user.getAuthorities().stream().collect(Collectors.toList()));
+       // userDto.setAuthorities(user.getAuthorities().stream().collect(Collectors.toList()));
         return userDto;
     }
 
@@ -43,4 +43,5 @@ public class UserMapper {
       //  userEntity.setAuthorities(user.getAuthorities().stream().collect(Collectors.toList()));
         return userEntity;
     }
+
 }

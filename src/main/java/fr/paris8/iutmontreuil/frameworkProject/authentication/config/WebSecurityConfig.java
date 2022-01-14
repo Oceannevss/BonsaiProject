@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
-                // Add your endpoints
+                .antMatchers("/users/**").permitAll()
                 .expressionHandler(webExpressionHandler()).and()
                 .csrf().disable()
                 .addFilter(new JsonAuthenticationFilter(authenticationManager(), new ObjectMapper()));

@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 
 
-@Table(name = "authorities")
+@Table(name = "authority")
 @Entity
 public class AuthorityEntity {
 

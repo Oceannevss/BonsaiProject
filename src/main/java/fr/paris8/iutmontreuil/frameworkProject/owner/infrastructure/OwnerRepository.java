@@ -26,7 +26,10 @@ public class OwnerRepository {
 
     public List<Owner> findAll() {
 
-        return ownerDao.findAll().stream().map(OwnerMapper::entityToOwner).collect(Collectors.toList());
+        return ownerDao.findAll()
+                        .stream()
+                        .map(OwnerMapper::entityToOwner)
+                        .collect(Collectors.toList());
     }
 
     public Optional<Owner> findById(UUID uuid) {
@@ -46,10 +49,11 @@ public class OwnerRepository {
     }
 
     public List<Bonsai> getBonsais(UUID id) {
-        return bonsaiDao.findAll().stream()
-                .filter(b -> b.getOwner() != null && b.getOwner().getId().equals(id))
-                .map(BonsaiMapper::EntityToBonsai)
-                .collect(Collectors.toList());
+        return bonsaiDao.findAll()
+                        .stream()
+                        .filter(b -> b.getOwner() != null && b.getOwner().getId().equals(id))
+                        .map(BonsaiMapper::EntityToBonsai)
+                        .collect(Collectors.toList());
     }
 
     public Bonsai transferBonsaiToOwner(Owner new_owner, Bonsai bonsai) {
@@ -60,7 +64,9 @@ public class OwnerRepository {
     }
 
     public Bonsai addBonsaiToOwner(Owner owner, Bonsai bonsai) {
+
         ownerDao.addNewBonsai(owner.getId(), bonsai.getId());
+
         return bonsai;
     }
 

@@ -1,7 +1,9 @@
 package fr.paris8.iutmontreuil.frameworkProject.owner.Mapper;
 
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.Mapper.BonsaiMapper;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Bonsai;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
+import fr.paris8.iutmontreuil.frameworkProject.owner.exposition.BonsaiDto;
 import fr.paris8.iutmontreuil.frameworkProject.owner.exposition.OwnerDTO;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.entity.OwnerEntity;
 
@@ -22,7 +24,7 @@ public class OwnerMapper {
         Owner owner = new Owner();
         owner.setId(ownerEntity.getId());
         owner.setName(ownerEntity.getName());
-        //owner.setBonsais(ownerEntity.getBonsais().stream().map(BonsaiMapper::DtoToBonsai).collect(Collectors.toList()));
+        owner.setBonsais(ownerEntity.getListBonsais().stream().map(BonsaiMapper::EntityToBonsai).collect(Collectors.toList()));
         return owner;
     }
 
@@ -38,44 +40,26 @@ public class OwnerMapper {
         OwnerEntity ownerEntity = new OwnerEntity();
         ownerEntity.setId(owner.getId());
         ownerEntity.setName(owner.getName());
-        //ownerEntity.setBonsais(owner.getBonsais().stream().map(BonsaiMapper::BonsaiToEntity).collect(Collectors.toList()));
+        ownerEntity.setListBonsais(owner.getBonsais().stream().map(BonsaiMapper::BonsaiToEntity).collect(Collectors.toList()));
         return ownerEntity;
     }
 
-   /* public static Bonsai toBonsai(BonsaiEntity bonsaiEntity) {
-        Bonsai bonsai = new Bonsai();
-        bonsai.setId(bonsaiEntity.getId());
-        bonsai.setName(bonsaiEntity.getName());
-        bonsai.setSpecies(bonsaiEntity.getSpecies());
-        bonsai.setAcquisition_age(bonsaiEntity.getAcquisition_age());
-        return bonsai;
-    }
-
-    public static Bonsai toBonsai(BonsaiDto bonsaiDto) {
-        Bonsai bonsai = new Bonsai();
-        bonsai.setId(bonsaiDto.getId());
-        bonsai.setName(bonsaiDto.getName());
-        bonsai.setSpecies(bonsaiDto.getSpecies());
-        bonsai.setAcquisition_age(bonsaiDto.getAcquisition_age());
-        return bonsai;
-    }
-
-    public static BonsaiDto toBonsaiDto(Bonsai bonsai) {
+    public static BonsaiDto bonsaiToDtoOwner(Bonsai bonsai) {
         BonsaiDto bonsaiDto = new BonsaiDto();
         bonsaiDto.setId(bonsai.getId());
         bonsaiDto.setName(bonsai.getName());
         bonsaiDto.setSpecies(bonsai.getSpecies());
-        bonsaiDto.setAcquisition_age(bonsai.getAcquisition_age());
+        bonsaiDto.setAcquisitionAge(bonsai.getAcquisitionAge());
         return bonsaiDto;
     }
 
-    public static BonsaiEntity toBonsaiEntity(Bonsai bonsai) {
-        BonsaiEntity bonsaiEntity = new BonsaiEntity();
-        bonsaiEntity.setId(bonsai.getId());
-        bonsaiEntity.setName(bonsai.getName());
-        bonsaiEntity.setSpecies(bonsai.getSpecies());
-        bonsaiEntity.setAcquisition_age(bonsai.getAcquisition_age());
-        return bonsaiEntity;
-    }*/
+    public static Bonsai dtoToBonsaiOwner(BonsaiDto bonsaiDto) {
+        Bonsai bonsai = new Bonsai();
+        bonsai.setId(bonsaiDto.getId());
+        bonsai.setName(bonsaiDto.getName());
+        bonsai.setSpecies(bonsaiDto.getSpecies());
+        bonsai.setAcquisitionAge(bonsaiDto.getAcquisitionAge());
+        return bonsai;
+    }
 
 }

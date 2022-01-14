@@ -65,3 +65,5 @@ insert into repotting (id, bonsai_id, repotting_date) values ('33c6eed0-5440-11e
 
 insert into bonsai (id, name, species, acquisition_date, acquisition_age, status) values ('53da5ad0-5f13-11ec-bf63-0242ac130002', 'Jack', 'Jade tree', '02-07-2022', 18 , 'alive');
 insert into pruning (id, bonsai_id, pruning_date) values ('6a1a68da-5f13-11ec-bf63-0242ac130002','53da5ad0-5f13-11ec-bf63-0242ac130002','2022-05-10');
+
+insert into owner (id, name, bonsai_id) values ('2fcb5e5a-7520-11ec-90d6-0242ac120003','Marco', (SELECT id from bonsai where name = 'Jack'));

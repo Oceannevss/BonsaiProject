@@ -9,7 +9,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @SpringBootApplication
-public class FirstSpringApplication {
+public class  FirstSpringApplication {
 
     public static void main(String[] args){
         SpringApplication.run(FirstSpringApplication.class, args);

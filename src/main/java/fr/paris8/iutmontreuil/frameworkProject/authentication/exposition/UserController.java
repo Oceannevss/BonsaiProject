@@ -5,7 +5,10 @@ import fr.paris8.iutmontreuil.frameworkProject.authentication.domain.UserService
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.ChangePasswordRequest;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.ChangeUserAuthorityRequest;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.UserCreationRequest;
+import fr.paris8.iutmontreuil.frameworkProject.owner.Mapper.OwnerMapper;
+import fr.paris8.iutmontreuil.frameworkProject.owner.exposition.OwnerDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UserDto> findAll() {
 
         return userService.findAll()
@@ -63,6 +67,13 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
+    @GetMapping("/owners")
+    public List<OwnerDTO> getOwners (@RequestBody OwnerDTO ownerDTO){
 
+         return userService.getOwners()
+                                .stream()
+                                .map(OwnerMapper::ownerToDto)
+                                .collect(Collectors.toList());
+    }
 
 }

@@ -1,6 +1,8 @@
 package fr.paris8.iutmontreuil.frameworkProject.authentication.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.UserCredential;
+import org.springframework.jdbc.datasource.UserCredentialsDataSourceAdapter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,10 +29,10 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            /*UserCredentials userCredentials = */objectMapper.readValue(request.getInputStream(), Object.class/*UserCredentials.class*/);
+            UserCredential userCredentials = objectMapper.readValue(request.getInputStream(), UserCredential.class);
 
             return this.getAuthenticationManager().authenticate(
-                    new UsernamePasswordAuthenticationToken(null /*userCredentials.getUsername()*/, null /*userCredentials.getPassword()*/, new ArrayList<>())
+                    new UsernamePasswordAuthenticationToken(userCredentials.getUserName(), userCredentials.getPassword(), new ArrayList<>())
             );
         } catch (IOException e) {
             throw new IllegalArgumentException("Invalid authentication object", e);

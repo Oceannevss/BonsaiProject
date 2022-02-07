@@ -4,6 +4,11 @@ import fr.paris8.iutmontreuil.frameworkProject.authentication.Mapper.UserMapper;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.exposition.UserDto;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.ChangePasswordRequest;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.*;
+import fr.paris8.iutmontreuil.frameworkProject.bonsai.infrastructure.DAO.BonsaiDao;
+import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
+import fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure.OwnerDao;
+import fr.paris8.iutmontreuil.frameworkProject.owner.infrastructure.OwnerRepository;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -54,12 +59,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
-      /* UserEntity user = userDao.findByUsername(s);
+
+         UserEntity user = userDao.findByUsername(s);
         List<String> authoritiesList = userDao.findAuthorityByUserId(user.getId());
         String authorities = String.join(",", authoritiesList);
         return new AppUser(user.getId(), user.getUsername(), user.getPassword(),
-                AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));*/
+                AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
     }
 
     public User changeMyPassword(ChangePasswordRequest changePasswordRequest){
@@ -100,5 +105,19 @@ public class UserService implements UserDetailsService {
         }
 
        return UserMapper.entityToUser(userDao.save(userEntity));
+    }
+
+    public List<Owner> getOwners(){
+        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        UserEntity userEntityCurrent = userDao.getById(credentials.getId());
+
+        if(userEntityCurrent.getAuthorities().get(0).getAuthority().equals("ADMIN")){
+            OwnerDao ownerDao = null;
+            BonsaiDao bonsaiDao = null;
+            OwnerRepository ownerRepository = new OwnerRepository(ownerDao, bonsaiDao);
+            return ownerRepository.findAll();
+        }
+
+        return null;
     }
 }

@@ -85,3 +85,5 @@ INSERT INTO authority (id, authority) values (
     ("1c76b664-753f-11ec-90d6-0242ac120003"),
     ("1c76b7b8-753f-11ec-90d6-0242ac120003")
 )
+
+<--update bonsai set owner_id = '2fcb5e5a-7520-11ec-90d6-0242ac120003' where id = '63696432-01a2-4b43-b162-47b4f1e6062a';

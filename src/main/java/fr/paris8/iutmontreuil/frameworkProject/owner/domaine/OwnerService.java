@@ -67,4 +67,9 @@ public class OwnerService {
 
         return listeBonsais;
     }
+
+    public void delete(UUID uuid){
+
+        ownerRepository.delete(uuid);
+    }
 }

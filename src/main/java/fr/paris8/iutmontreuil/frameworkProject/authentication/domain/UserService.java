@@ -69,7 +69,7 @@ public class UserService implements UserDetailsService {
 
     public User changeMyPassword(ChangePasswordRequest changePasswordRequest){
 
-        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity userEntity = userDao.getById(credentials.getId());
 
         boolean isEqualsOldPasswordBase = passwordEncoder.matches(changePasswordRequest.getOldPassword(), credentials.getPassword());
@@ -80,6 +80,7 @@ public class UserService implements UserDetailsService {
             if(isEqualsNewPassword){
                 if(!isEqualsOldNewPassword){
                     userEntity.setPassword(changePasswordRequest.getNewPassword());
+                    userDao.save(userEntity);
                 }
             }
         }
@@ -89,7 +90,7 @@ public class UserService implements UserDetailsService {
 
     public User changeUserAuthority(UUID uuid, ChangeUserAuthorityRequest changeUserAuthorityRequest){
 
-        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity userEntityCurrent = userDao.getById(credentials.getId());
         UserEntity userEntity = userDao.getById(uuid);
 
@@ -102,6 +103,7 @@ public class UserService implements UserDetailsService {
 
         if(userEntityCurrent.getAuthorities().get(0).getAuthority().equals("ADMIN")){
             userEntity.setAuthorities(ListeAuthority);
+            userDao.save(userEntity);
         }
 
        return UserMapper.entityToUser(userDao.save(userEntity));
@@ -119,5 +121,14 @@ public class UserService implements UserDetailsService {
         }
 
         return null;
+    }
+
+    public User getCurrentUser(){
+
+        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity userEntityCurrent = userDao.getById(credentials.getId());
+
+        return UserMapper.entityToUser(userEntityCurrent);
+
     }
 }

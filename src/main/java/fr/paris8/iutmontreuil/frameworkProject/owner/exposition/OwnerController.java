@@ -6,8 +6,8 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.exposition.dto.BonsaiDTO;
 import fr.paris8.iutmontreuil.frameworkProject.owner.Mapper.OwnerMapper;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.Owner;
 import fr.paris8.iutmontreuil.frameworkProject.owner.domaine.OwnerService;
-
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class OwnerController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<OwnerDTO> findAll() {
 
         return ownerService.findAll().stream().map(OwnerMapper::ownerToDto).collect(Collectors.toList());
@@ -73,5 +74,12 @@ public class OwnerController {
                             .stream()
                             .map(OwnerMapper::bonsaiToDtoOwner)
                             .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteOwners(@PathVariable UUID uuid){
+
+         ownerService.delete(uuid);
     }
 }

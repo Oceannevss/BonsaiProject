@@ -10,6 +10,7 @@ import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Pruning;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Repotting;
 import fr.paris8.iutmontreuil.frameworkProject.bonsai.domaine.model.Watering;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -85,12 +86,14 @@ public class BonsaiController {
    }*/
 
    @DeleteMapping("/{uuid}")
+   @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteById(@PathVariable UUID uuid){
 
          bonsaiService.deleteById(uuid);
    }
 
     @PatchMapping("/{uuid}")
+    @PreAuthorize("hasAuthority('STAFF')")
     public ResponseEntity<BonsaiDTO> update(@PathVariable UUID uuid, @RequestBody BonsaiDTO bonsaiDTO) {
 
         return bonsaiService.update(uuid, BonsaiMapper.DtoToBonsai(bonsaiDTO))
@@ -99,6 +102,7 @@ public class BonsaiController {
     }
 
     @PutMapping("/{uuid}/status")
+    @PreAuthorize("hasAuthority('STAFF')")
     public ResponseEntity<BonsaiDTO> statusUpdate(@PathVariable UUID uuid, @RequestBody String status){
 
         return bonsaiService.statusUpdate(uuid, status)

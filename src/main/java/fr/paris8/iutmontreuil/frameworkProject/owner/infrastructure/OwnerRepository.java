@@ -73,4 +73,10 @@ public class OwnerRepository {
     public Optional<Bonsai> findBonsaiById(UUID id) {
         return bonsaiDao.findById(id).map(BonsaiMapper::EntityToBonsai);
     }
+
+    public void delete(UUID uuid){
+
+        OwnerEntity ownerEntity = ownerDao.getById(uuid);
+        ownerDao.delete(ownerEntity);
+    }
 }

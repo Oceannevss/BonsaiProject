@@ -5,8 +5,6 @@ import fr.paris8.iutmontreuil.frameworkProject.authentication.domain.UserService
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.ChangePasswordRequest;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.ChangeUserAuthorityRequest;
 import fr.paris8.iutmontreuil.frameworkProject.authentication.infrastructure.UserCreationRequest;
-import fr.paris8.iutmontreuil.frameworkProject.owner.Mapper.OwnerMapper;
-import fr.paris8.iutmontreuil.frameworkProject.owner.exposition.OwnerDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -49,31 +47,19 @@ public class UserController {
 
     }
 
-    @PutMapping("/users/{uuid}/authority")
+    @PutMapping("/{uuid}/authority")
     public void changeUserAuthority(@PathVariable UUID uuid, @RequestBody ChangeUserAuthorityRequest changeUserAuthorityRequest){
 
         userService.changeUserAuthority(uuid, changeUserAuthorityRequest);
     }
 
-    /*@GetMapping
-    public List<UserDto> GetUsers(@RequestBody UserDto userDto ){
-
-        return List<UserDto>;
-    }*/
-
     @GetMapping("/me")
-    public ResponseEntity<UserDto> getCurrentUser (@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> getCurrentUser (){
 
-        return ResponseEntity.ok(userDto);
+       UserDto userDto = UserMapper.userToDto(userService.getCurrentUser());
+       return ResponseEntity.ok(userDto);
     }
 
-    @GetMapping("/owners")
-    public List<OwnerDTO> getOwners (@RequestBody OwnerDTO ownerDTO){
 
-         return userService.getOwners()
-                                .stream()
-                                .map(OwnerMapper::ownerToDto)
-                                .collect(Collectors.toList());
-    }
 
 }
